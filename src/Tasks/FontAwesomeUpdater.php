@@ -7,24 +7,28 @@ use SilverStripe\Core\Convert;
 use SilverStripe\Core\Environment;
 use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\PolyExecution\PolyOutput;
 use SilverStripe\View\ThemeResourceLoader;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class FontAwesomeUpdater extends BuildTask
 {
-    protected $title = 'Generate Font Awesome icons';
-    protected $description = 'Generate icons for the Font Awesome fields';
+    protected string $title = 'Generate Font Awesome icons';
+    protected static string $description = 'Generate icons for the Font Awesome fields';
 
     private static $segment = 'generate-font-awesome';
 
     /**
      * @inheritDoc
      */
-    public function run($request)
+    public function run(InputInterface $input, PolyOutput $output): int
     {
-        $path = Self::getIconYMLLocation();
+        $path = self::getIconYMLLocation();
 
         self::generateFontAwesomeIconCache($path);
+
+        return true;
     }
 
     /**
@@ -166,5 +170,9 @@ class FontAwesomeUpdater extends BuildTask
         } else {
             print (Director::is_cli() ? "\n$message\n\n" : '<li' . ($error ? ' class="error"' : '') . '>' . Convert::raw2xml($message) . '</li>');
         }
+    }
+
+    protected function execute(InputInterface $input, PolyOutput $output): int {
+        // TODO: Implement execute() method.
     }
 }
