@@ -5,7 +5,7 @@ PageController:
     extensions:
         FontAwesomeIconPicker: 'BucklesHusky\FontAwesomeIconPicker\Extensions\PageControllerExtension'
 
-SilverStripe\Dev\DevBuildController:
+SilverStripe\Dev\Command\DbBuild:
   extensions:
     - 'BucklesHusky\FontAwesomeIconPicker\Extensions\FontAwesomeUpdater'
 

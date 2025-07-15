@@ -10,7 +10,7 @@ class FontAwesomeUpdater extends Extension
     /**
      * Handles generating or Font Awesome icons
      */
-    public function afterCallActionHandler()
+    public function onAfterBuild(&$output, &$populate, &$testMode)
     {
         // if this is true, don't run generating the icons
         if (!$this->getDisableGenerateOnBuild()) {
