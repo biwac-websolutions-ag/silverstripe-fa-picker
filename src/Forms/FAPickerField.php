@@ -97,8 +97,8 @@ class FAPickerField extends TextField implements Flushable
             'class' => $this->extraClass(),
             'id' => $this->ID(),
             'name' => $this->getName(),
-            'value' => $this->value(),
-            'data-schema' => json_encode($this->getSchemaData()),
+            'value' => $this->getValue(),
+            //'data-schema' => json_encode($this->getSchemaData()), @todo triggers server error
             'data-state' => json_encode($this->getSchemaState()),
         );
 
