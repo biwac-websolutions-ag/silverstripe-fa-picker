@@ -16,25 +16,6 @@ class LeftAndMainExtension extends Extension
     private static $iconData;
 
     /**
-     * @inheritDoc
-     */
-    public function init()
-    {
-        $icons = json_encode($this->owner->getIconList());
-        $iconAmount = $this->owner->getIconAmount();
-        $icountVersion = $this->owner->getVersionNumber();
-
-        // load the requirements
-        Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
-        Requirements::customScript(<<<JS
-            let fullIconList = $icons;
-            let iconAmount = '$iconAmount';
-            let iconVersion = '$icountVersion';
-        JS
-        );
-    }
-
-    /**
      * Get the icon data and store it in a private static
      * @return stdClass|boolean
      */
@@ -126,6 +107,19 @@ class LeftAndMainExtension extends Extension
      */
     public function onBeforeInit()
     {
+        $icons = json_encode($this->owner->getIconList());
+        $iconAmount = $this->owner->getIconAmount();
+        $icountVersion = $this->owner->getVersionNumber();
+
+        // load the requirements
+        Requirements::add_i18n_javascript('buckleshusky/fontawesomeiconpicker: javascript/lang');
+        Requirements::customScript(<<<JS
+            let fullIconList = $icons;
+            let iconAmount = '$iconAmount';
+            let iconVersion = '$icountVersion';
+        JS
+        );
+
         // if we are using the proversion get the pro version css from theme
         if ($this->getIsProVersion()) {
             $loader = ThemeResourceLoader::inst();
