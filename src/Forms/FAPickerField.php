@@ -72,33 +72,25 @@ class FAPickerField extends TextField implements Flushable
      * @inheritDoc
      *
      * */
-    public function getSchemaDataDefaults()
-    {
-        $defaults = parent::getSchemaDataDefaults();
-
-        //@todo needs to send over version, icon total, and pro enabled
-        $defaults['data']['pro'] = $this->getIsProVersion();
-        $defaults['data']['isSharpDisabled'] = $this->getIsSharpIconsDisabled();
-        $defaults['data']['taskLink'] = Controller::join_links([
-            Director::absoluteBaseURL(),
-            'dev/tasks/generate-font-awesome',
-        ]);
-
-        return $defaults;
-    }
-
-    /**
-     * @inheritDoc
-     *
-     * */
     public function getAttributes()
     {
+        $defaults = [
+            'data' => [
+                'pro' => $this->getIsProVersion(),
+                'isSharpDisabled' => $this->getIsSharpIconsDisabled(),
+                'taskLink' => Controller::join_links([
+                    Director::absoluteBaseURL(),
+                    'dev/tasks/generate-font-awesome',
+                ]),
+            ]
+        ];
+
         $attributes = array(
             'class' => $this->extraClass(),
             'id' => $this->ID(),
             'name' => $this->getName(),
             'value' => $this->getValue(),
-            //'data-schema' => json_encode($this->getSchemaData()), @todo triggers server error
+            'data-schema' => json_encode($defaults),//$this->getSchemaData()
             'data-state' => json_encode($this->getSchemaState()),
         );
 
